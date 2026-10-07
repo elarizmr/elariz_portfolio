@@ -350,23 +350,6 @@ const GalleryRoom = ({ showRoom, onReady, isExiting, isWarmup }: GalleryRoomProp
     const backTextureRaw = useTexture(canHover ? '/textures/gallery/tylkartki_painted.webp' : '/textures/gallery/tylkartki.webp');
     const overlayTextureRaw = useTexture(canHover ? '/textures/gallery/przyciskdotylukartki_painted.webp' : '/textures/gallery/przyciskdotylukartki.webp');
 
-    // Preload tech stack logos to prevent stuttering on first flip
-    // We use the same conditional logic: painted on desktop, regular on touch
-    const allLogos = useMemo(() => {
-        const names = [
-            'csslogo', 'elementorlogo', 'firebaselogo', 'htmllogo',
-            'jslogo', 'netlifylogo', 'phplogo', 'reactlogo',
-            'tailwindlogo', 'wordpresslogo'
-        ];
-        return names.map(name => {
-            if (!canHover) return `/textures/gallery/${name}.webp`;
-            if (name === 'csslogo') return `/textures/gallery/css3logo_painted.webp`;
-            return `/textures/gallery/${name}_painted.webp`;
-        });
-    }, [canHover]);
-    
-    useTexture(allLogos);
-
     // Construct the full list of projects (repeated) with textures attached
     const projects = useMemo<GalleryCardProject[]>(() => {
         return Array.from({ length: PROJECT_COUNT }).map((_, i) => {
